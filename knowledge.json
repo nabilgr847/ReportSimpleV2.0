@@ -1,0 +1,161 @@
+{
+ "_meta": {
+  "note": "Plain-language explanations written for this project from general medical knowledge. Each entry points to a reputable public source for further reading. Only the CBC and hemoglobin links go to a specific page; the others point to the MedlinePlus lab tests index. Have a qualified professional review before relying on them."
+ },
+ "tests": {
+  "hemoglobin": {
+   "measures": "Hemoglobin is the protein in red blood cells that carries oxygen around the body.",
+   "high": "A high level can be linked to long-term low oxygen levels, living at high altitude, or too many red blood cells. A doctor needs to look at the cause.",
+   "low": "A low level can be linked to anemia, blood loss, low iron or other vitamin levels, or other conditions. A doctor needs to look at the cause.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/hemoglobin-test"
+  },
+  "wbc": {
+   "measures": "White blood cells are part of the immune system and help the body fight infection.",
+   "high": "A high count can be seen with infections, inflammation, stress, some medicines and other conditions.",
+   "low": "A low count can be seen with some infections, medicines, immune or bone marrow conditions.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/complete-blood-count-cbc/"
+  },
+  "platelets": {
+   "measures": "Platelets are small cell pieces that help blood to clot and stop bleeding.",
+   "high": "A high count can be seen with inflammation, iron deficiency and some blood conditions.",
+   "low": "A low count can raise the chance of bleeding or bruising and has many possible causes, so it should be checked by a doctor.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/complete-blood-count-cbc/"
+  },
+  "rbc": {
+   "measures": "Red blood cells carry oxygen. The RBC count is the number of red blood cells in a small amount of blood.",
+   "high": "A high count can be linked to dehydration, low oxygen levels or other conditions.",
+   "low": "A low count can be linked to anemia, blood loss or other conditions.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/complete-blood-count-cbc/"
+  },
+  "glucose_fasting": {
+   "measures": "Fasting blood sugar is the sugar (glucose) level in blood after not eating for at least 8 hours.",
+   "high": "A high fasting level can be a sign of problems with blood sugar control. One result alone is not a diagnosis, and doctors usually repeat or confirm it.",
+   "low": "A low level can cause shakiness, sweating or weakness and can be linked to medicines, long gaps without food or other conditions.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "hba1c": {
+   "measures": "HbA1c shows the average blood sugar level over about the last 2 to 3 months.",
+   "high": "A high value means blood sugar has been higher than the usual target. A doctor uses it with other tests to decide what it means.",
+   "low": "A low value is uncommon and may be related to some blood conditions or medicines.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "cholesterol_total": {
+   "measures": "Total cholesterol is the overall amount of cholesterol, a fat-like substance, in the blood.",
+   "high": "A high level is linked to a higher chance of heart and blood vessel disease over time. A doctor looks at the full lipid panel and other risk factors.",
+   "low": "A very low level is uncommon and can have different causes, so it is worth mentioning to a doctor.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "ldl": {
+   "measures": "LDL is often called 'bad' cholesterol because high levels can build up in blood vessel walls.",
+   "high": "A high level is linked to a higher chance of heart and blood vessel disease over time.",
+   "low": "A low level is usually not a concern on its own.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "hdl": {
+   "measures": "HDL is often called 'good' cholesterol because it helps remove other cholesterol from the blood.",
+   "high": "A high level is usually not a concern.",
+   "low": "A low level is linked to a higher chance of heart and blood vessel disease over time.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "triglycerides": {
+   "measures": "Triglycerides are a type of fat in the blood. Levels rise after meals and with some medical conditions.",
+   "high": "A high level is linked to a higher chance of heart disease, and very high levels can affect the pancreas. A doctor looks at the full picture.",
+   "low": "A low level is usually not a concern.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "creatinine": {
+   "measures": "Creatinine is a waste product from muscles that the kidneys remove. It helps show how well the kidneys filter blood.",
+   "high": "A high level can mean the kidneys are not filtering as well as usual, or can be linked to dehydration, muscle mass or medicines. A doctor needs to check.",
+   "low": "A low level is often related to low muscle mass and is usually not a concern on its own.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "uric_acid": {
+   "measures": "Uric acid is a waste product made when the body breaks down certain foods and cells.",
+   "high": "A high level can be linked to gout or kidney stones in some people, and also to diet, medicines and kidney function.",
+   "low": "A low level is uncommon and usually not a concern on its own.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "alt": {
+   "measures": "ALT is an enzyme found mostly in the liver. It can leak into the blood when liver cells are irritated or damaged.",
+   "high": "A high level can be linked to liver irritation from many causes such as medicines, alcohol, fatty liver or infections. A doctor needs to look at the cause.",
+   "low": "A low level is usually not a concern.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "ast": {
+   "measures": "AST is an enzyme found in the liver and also in muscles and other organs.",
+   "high": "A high level can be linked to liver irritation, muscle injury or other causes. A doctor usually reads it together with ALT.",
+   "low": "A low level is usually not a concern.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "alp": {
+   "measures": "ALP is an enzyme found in the liver, bile ducts and bones.",
+   "high": "A high level can be linked to liver or bile duct problems or to bone conditions. A doctor needs to look at the cause.",
+   "low": "A low level is uncommon and can have different causes.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "bilirubin_total": {
+   "measures": "Bilirubin is a yellow substance made when old red blood cells are broken down. The liver removes it from the body.",
+   "high": "A high level can cause yellowing of the skin or eyes (jaundice) and can be linked to liver, bile duct or blood conditions.",
+   "low": "A low level is usually not a concern.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "albumin": {
+   "measures": "Albumin is a protein made by the liver. It keeps fluid in the blood vessels and carries substances around the body.",
+   "high": "A high level is often related to dehydration.",
+   "low": "A low level can be linked to liver or kidney conditions, poor nutrition or long-term illness.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "tsh": {
+   "measures": "TSH is a hormone from the pituitary gland that tells the thyroid how much thyroid hormone to make.",
+   "high": "A high TSH can be linked to an underactive thyroid. A doctor usually checks it together with thyroid hormone levels.",
+   "low": "A low TSH can be linked to an overactive thyroid or some medicines. A doctor usually checks it together with thyroid hormone levels.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "potassium": {
+   "measures": "Potassium is a mineral that helps nerves, muscles and the heart work normally.",
+   "high": "A high level can affect the heart rhythm and needs prompt medical advice, especially if it is far above the range.",
+   "low": "A low level can cause weakness or muscle cramps and can affect the heart rhythm, so it needs medical advice.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "sodium": {
+   "measures": "Sodium is a mineral that helps control body water and blood pressure.",
+   "high": "A high level is often linked to not enough water in the body.",
+   "low": "A low level can be linked to too much water, some medicines or medical conditions and can cause confusion or weakness if it is far below the range.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "vitamin_d": {
+   "measures": "Vitamin D helps the body absorb calcium and keeps bones and muscles healthy.",
+   "high": "A very high level is uncommon and is usually related to taking too many supplements.",
+   "low": "A low level is common and can be linked to little sun exposure, diet or some conditions. A doctor may suggest food, sunlight or supplements.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  },
+  "ferritin": {
+   "measures": "Ferritin is a protein that stores iron. The level shows how much iron the body has stored.",
+   "high": "A high level can be linked to inflammation, liver conditions or too much iron.",
+   "low": "A low level is a common sign of low iron stores.",
+   "source": "MedlinePlus Lab Tests (NIH, U.S. National Library of Medicine)",
+   "url": "https://medlineplus.gov/lab-tests/"
+  }
+ }
+}

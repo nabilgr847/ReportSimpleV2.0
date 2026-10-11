@@ -1,0 +1,8 @@
+flask
+gunicorn
+openai
+pytesseract
+pdfplumber
+pdf2image
+pillow
+reportlab

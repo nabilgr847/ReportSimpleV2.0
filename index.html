@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1D6FE8">
+<title>ReportSimple V2: Medical Reports in Plain Language</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A9%BA%3C/text%3E%3C/svg%3E">
+<style>
+:root{--blue:#1D6FE8;--blue2:#4FA3F7;--navy:#0F2A4A;--bg:#EEF5FD;--card:#fff;--ink:#1B2B3F;--mute:#6B7C93;--line:#E1EAF5;--ok:#16A34A;--bad:#DC2626;--warn:#D97706;--okbg:#E7F7EE;--badbg:#FDECEC;--warnbg:#FEF3DC;--r:18px}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1726;--card:#16233A;--ink:#E8EFFA;--mute:#93A4BE;--line:#243556;--okbg:#12301F;--badbg:#3A1717;--warnbg:#3A2C10;--navy:#0B1424}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Bengali","Noto Sans Devanagari",sans-serif;background:#cfe0f5;color:var(--ink)}
+#app{max-width:440px;height:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;position:relative;box-shadow:0 0 40px rgba(15,42,74,.18);overflow:hidden}
+main{flex:1;overflow-y:auto;overflow-x:hidden;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 24px;-webkit-overflow-scrolling:touch}
+.screen{display:none}.screen.active{display:block}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:18px 0 8px}h3{font-size:15px;margin:0}
+p{line-height:1.5;margin:6px 0}.mute{color:var(--mute);font-size:13px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.back{border:0;background:var(--card);width:38px;height:38px;border-radius:50%;font-size:20px;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08);cursor:pointer}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;color:var(--blue)}
+.card{background:var(--card);border-radius:var(--r);padding:14px;margin:10px 0;box-shadow:0 2px 10px rgba(29,111,232,.07);border:1px solid var(--line)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:14px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2))}
+.btn.sec{background:var(--card);color:var(--blue);border:1.5px solid var(--blue)}
+.btn.small{width:auto;padding:9px 14px;font-size:14px;border-radius:12px}
+.btn:disabled{opacity:.6}
+.hero{display:flex;gap:12px;align-items:center;margin:6px 0 14px}
+.hero .bot{font-size:54px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
+.tile .ic{font-size:26px}.tile b{display:block;margin-top:6px}.tile span{font-size:12px;color:var(--mute)}
+.trust{background:linear-gradient(135deg,#1D6FE8,#27B49A);color:#fff;border-radius:16px;padding:14px;display:flex;gap:10px;align-items:center}
+.drop{border:2px dashed var(--blue2);border-radius:18px;text-align:center;padding:26px 12px;background:var(--card);cursor:pointer;display:block}
+.drop .ic{font-size:38px}.drop b{display:block;margin-top:6px}
+input[type=file]{display:none}
+label.f{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}
+select,input[type=number],input[type=date],input[type=text],textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;font-size:15px}
+textarea{min-height:110px}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.pill.normal{background:var(--okbg);color:var(--ok)}.pill.high,.pill.low{background:var(--badbg);color:var(--bad)}.pill.unclear{background:var(--line);color:var(--mute)}.pill.warn{background:var(--warnbg);color:var(--warn)}
+.banner{border-radius:14px;padding:12px 14px;font-weight:700;display:flex;gap:8px;align-items:center;margin:8px 0}
+.banner.routine{background:var(--okbg);color:var(--ok)}.banner.see_doctor_soon{background:var(--warnbg);color:var(--warn)}.banner.urgent{background:var(--badbg);color:var(--bad)}
+.tabs{display:flex;background:var(--card);border-radius:14px;padding:4px;border:1px solid var(--line);margin:10px 0}
+.tabs button{flex:1;border:0;background:transparent;padding:9px;border-radius:10px;font:inherit;font-weight:700;color:var(--mute);cursor:pointer}
+.tabs button.on{background:var(--blue);color:#fff}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.res{padding:12px 0;border-bottom:1px solid var(--line)}.res:last-child{border:0}
+.res .n{font-weight:700}.res small{color:var(--mute);display:block;margin-top:2px}
+.warnbox{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:8px 10px;font-size:13px;margin:6px 0}
+details{margin-top:6px}summary{cursor:pointer;color:var(--blue);font-size:13px;font-weight:600}
+details p{font-size:13.5px}
+.track{position:relative;height:12px;background:var(--line);border-radius:8px;margin:10px 0 2px}
+.band{position:absolute;top:0;bottom:0;background:#9BDDB4;border-radius:8px}
+.mark{position:absolute;top:-4px;width:6px;height:20px;border-radius:3px;transform:translateX(-3px)}
+.chat{display:flex;flex-direction:column;gap:8px;margin:10px 0 70px}
+.msg{max-width:86%;padding:10px 12px;border-radius:16px;font-size:14.5px;line-height:1.45;white-space:pre-wrap}
+.msg.u{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:4px}
+.msg.a{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 11px;border-radius:999px;font-size:13px;cursor:pointer}
+.chatbar{position:sticky;bottom:0;display:flex;gap:8px;padding:10px 0;background:var(--bg)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-size:12px}
+.up{color:var(--bad)}.dn{color:var(--bad)}.good{color:var(--ok)}.flat{color:var(--mute)}
+nav{display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 6px calc(env(safe-area-inset-bottom,0px) + 6px)}
+nav button{flex:1;border:0;background:none;color:var(--mute);font:inherit;font-size:11.5px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px;cursor:pointer}
+nav button .i{font-size:22px}nav button.on{color:var(--blue);font-weight:700}
+.overlay{position:absolute;inset:0;background:rgba(15,42,74,.6);display:none;align-items:center;justify-content:center;z-index:10}
+.overlay.show{display:flex}.sheet{background:var(--card);border-radius:20px;padding:24px;width:82%;text-align:center}
+.spin{width:44px;height:44px;border:5px solid var(--line);border-top-color:var(--blue);border-radius:50%;margin:0 auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.err{background:var(--badbg);color:var(--bad);border-radius:12px;padding:10px 12px;margin:10px 0;font-size:14px;display:none}
+.toggle{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.disc{font-size:12px;color:var(--mute);text-align:center;margin:18px 6px}
+</style>
+</head>
+<body>
+<div id="app">
+<main>
+
+<!-- HOME -->
+<section id="home" class="screen active">
+  <div class="top"><div class="logo"><svg width="30" height="30" viewBox="0 0 24 24"><path fill="#1D6FE8" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.6 5 6 5c2 0 3.4 1 4.4 2.4h3.2C14.6 6 16 5 18 5c3.400 0 5.100 3.400 3.600 6.800C19.500 16.400 12 21 12 21z"/><path fill="none" stroke="#fff" stroke-width="1.6" d="M4.500 12.500h4l1.500-3 2.500 6 1.800-3h5.200"/></svg>ReportSimple<span style="color:#27B49A">V2</span></div></div>
+  <div class="hero"><div><h1>Hello! 👋<br>Your health matters</h1><p class="mute">Upload a lab report and get a simple explanation, checked by rules.</p></div><div class="bot">🤖</div></div>
+  <button class="btn" onclick="go('upload')">⬆️ Upload Report</button>
+  <div class="grid">
+    <button class="tile" onclick="go('reports')"><div class="ic">📄</div><b>My Reports</b><span>View &amp; manage</span></button>
+    <button class="tile" onclick="openChat()"><div class="ic">💬</div><b>Chat with AI</b><span>Ask about your report</span></button>
+    <button class="tile" onclick="openCompare()"><div class="ic">📈</div><b>Compare</b><span>Track over time</span></button>
+    <button class="tile" onclick="go('settings')"><div class="ic">⚙️</div><b>Settings</b><span>Language, privacy</span></button>
+  </div>
+  <div class="trust"><div style="font-size:28px">🛡️</div><div><b>No login. Nothing saved on our server.</b><div style="font-size:12.5px;opacity:.9">Saved reports stay on this device. Report text is sent to an AI service to be explained.</div></div></div>
+  <p class="disc">Educational tool only. Not a diagnosis or a substitute for a doctor.</p>
+</section>
+
+<!-- UPLOAD -->
+<section id="upload" class="screen">
+  <div class="top"><button class="back" onclick="go('home')" aria-label="Back">‹</button><h3>Upload Report</h3></div>
+  <h2 style="margin-top:4px">Upload your lab report</h2>
+  <p class="mute">PDF, JPG or PNG (max 10 MB). A flat, well-lit photo works best.</p>
+  <label class="drop" for="file"><div class="ic">📤</div><b id="fname">Tap to choose a file</b><span class="mute">PDF, JPG, PNG, TXT</span></label>
+  <input id="file" type="file" accept="application/pdf,image/*,.txt">
+  <p class="mute" style="text-align:center;margin:8px 0">or</p>
+  <label class="btn sec" for="cam">📷 Take a Photo</label>
+  <input id="cam" type="file" accept="image/*" capture="environment">
+  <details><summary>Paste report text instead</summary><textarea id="ptext" placeholder="Paste the report text here"></textarea></details>
+  <div class="row"><div><label class="f">Language</label><select id="lang"><option>English</option><option>Bangla</option><option>Hindi</option></select></div>
+  <div><label class="f">Report date</label><input id="rdate" type="date"></div></div>
+  <div class="row"><div><label class="f">Age (optional)</label><input id="age" type="number" min="1" max="120" inputmode="numeric"></div>
+  <div><label class="f">Sex (optional)</label><select id="sex"><option value="">Not specified</option><option value="male">Male</option><option value="female">Female</option></select></div></div>
+  <p class="mute">Age and sex are used only to pick the reference range. They are not sent to the AI. Under 18, the range printed on the report is used.</p>
+  <div class="err" id="uerr"></div>
+  <button class="btn" id="go" onclick="analyze()">Analyze report</button>
+</section>
+
+<!-- RESULT -->
+<section id="result" class="screen">
+  <div class="top"><button class="back" onclick="go('home')" aria-label="Back">‹</button><h3>Analysis Result</h3></div>
+  <div id="rhead"></div>
+  <div class="tabs" id="rtabs"><button class="on" data-t="sum">Summary</button><button data-t="det">Detailed</button><button data-t="gr">Graph</button></div>
+  <div id="rbody"></div>
+</section>
+
+<!-- CHAT -->
+<section id="chat" class="screen">
+  <div class="top"><button class="back" onclick="go('home')" aria-label="Back">‹</button><h3>AI Chat about your report</h3></div>
+  <div id="chatctx" class="mute"></div>
+  <div class="chips" id="chips"></div>
+  <div class="chat" id="msgs"></div>
+  <div class="chatbar"><input id="cin" type="text" placeholder="Ask about your results..." maxlength="500"><button class="btn small" id="csend" onclick="sendChat()">Send</button></div>
+</section>
+
+<!-- REPORTS -->
+<section id="reports" class="screen">
+  <div class="top"><h3 style="font-size:20px">My Reports</h3></div>
+  <input type="text" id="search" placeholder="Search by date or test..." oninput="renderReports()">
+  <div id="rlist"></div>
+  <div class="row" style="margin-top:12px"><button class="btn sec small" onclick="openCompare()">Compare</button><button class="btn sec small" onclick="backup()">Backup</button><label class="btn sec small" for="restore" style="margin:0">Restore</label></div>
+  <input id="restore" type="file" accept="application/json">
+</section>
+
+<!-- COMPARE -->
+<section id="compare" class="screen">
+  <div class="top"><button class="back" onclick="go('reports')" aria-label="Back">‹</button><h3>Report Comparison</h3></div>
+  <div id="cbody"></div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings" class="screen">
+  <div class="top"><h3 style="font-size:20px">Settings</h3></div>
+  <div class="card"><label class="f" style="margin-top:0">Default language</label><select id="s_lang" onchange="saveSettings()"><option>English</option><option>Bangla</option><option>Hindi</option></select>
+  <div class="row"><div><label class="f">Age (optional)</label><input id="s_age" type="number" min="1" max="120" onchange="saveSettings()"></div>
+  <div><label class="f">Sex (optional)</label><select id="s_sex" onchange="saveSettings()"><option value="">Not specified</option><option value="male">Male</option><option value="female">Female</option></select></div></div></div>
+  <div class="card"><div class="toggle"><div><b>Privacy mode</b><div class="mute">Do not save reports on this device</div></div><input type="checkbox" id="s_priv" onchange="saveSettings()" style="width:22px;height:22px"></div></div>
+  <div class="card"><b>Your data</b><p class="mute">Saved reports are stored only in this browser on this device. Nothing is stored on our server.</p><button class="btn sec small" onclick="clearAll()">Delete all saved data</button></div>
+  <div class="card"><b>About</b><p class="mute">The AI only extracts and explains. A rule engine decides high, low and normal. Reference ranges are general adult guidance and labs differ. Urgency is a rule of thumb, not triage.</p></div>
+  <p class="disc">Educational tool only. Not a diagnosis or a substitute for a doctor. If you feel very unwell, contact a doctor or emergency services.</p>
+</section>
+
+</main>
+<nav id="nav">
+  <button data-n="home" onclick="go('home')"><span class="i">🏠</span>Home</button>
+  <button data-n="reports" onclick="go('reports')"><span class="i">📄</span>Reports</button>
+  <button data-n="chat" onclick="openChat()"><span class="i">💬</span>Chat</button>
+  <button data-n="settings" onclick="go('settings')"><span class="i">👤</span>Profile</button>
+</nav>
+<div class="overlay" id="busy"><div class="sheet"><div class="spin"></div><b id="busytxt">Reading your report...</b><p class="mute">This can take 10 to 30 seconds.</p></div></div>
+</div>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const LS = "reportsimple_v2";
+let S = {settings: {lang: "English", age: "", sex: "", priv: false}, reports: []};
+let cur = null, tab = "sum", chatHist = [], chatFor = null;
+
+try { const d = JSON.parse(localStorage.getItem(LS) || "null"); if (d) { S.settings = Object.assign(S.settings, d.settings); S.reports = d.reports || []; } } catch (e) {}
+function persist() { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} }
+
+/* ---------- navigation ---------- */
+const NAVMAP = {home: "home", upload: "home", result: "reports", chat: "chat", reports: "reports", compare: "reports", settings: "settings"};
+function go(id) {
+  document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("active", s.id === id));
+  document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.n === NAVMAP[id]));
+  document.querySelector("main").scrollTop = 0;
+  if (id === "reports") renderReports();
+  if (id === "upload") loadUploadDefaults();
+  if (id === "settings") loadSettings();
+  if ("speechSynthesis" in window && id !== "result") speechSynthesis.cancel();
+}
+
+/* ---------- settings ---------- */
+function loadSettings() { const s = S.settings; $("s_lang").value = s.lang; $("s_age").value = s.age; $("s_sex").value = s.sex; $("s_priv").checked = !!s.priv; }
+function saveSettings() { S.settings = {lang: $("s_lang").value, age: $("s_age").value, sex: $("s_sex").value, priv: $("s_priv").checked}; persist(); }
+function loadUploadDefaults() {
+  $("lang").value = S.settings.lang; $("age").value = S.settings.age; $("sex").value = S.settings.sex;
+  if (!$("rdate").value) $("rdate").value = new Date().toISOString().slice(0, 10);
+}
+function clearAll() { if (confirm("Delete all saved reports and settings from this device?")) { S = {settings: {lang: "English", age: "", sex: "", priv: false}, reports: []}; persist(); cur = null; loadSettings(); alert("Deleted."); } }
+
+/* ---------- upload + analyze ---------- */
+let chosen = null;
+for (const id of ["file", "cam"]) $(id).addEventListener("change", (e) => { chosen = e.target.files[0] || null; $("fname").textContent = chosen ? chosen.name : "Tap to choose a file"; });
+function showErr(m) { const e = $("uerr"); e.textContent = m; e.style.display = m ? "block" : "none"; }
+async function analyze() {
+  showErr("");
+  const text = $("ptext").value.trim();
+  if (!chosen && !text) { showErr("Please choose a file, take a photo, or paste the report text."); return; }
+  const fd = new FormData();
+  if (chosen) fd.append("file", chosen); else fd.append("text", text);
+  fd.append("lang", $("lang").value); fd.append("age", $("age").value); fd.append("sex", $("sex").value);
+  const msgs = ["Reading your report...", "Checking values with rules...", "Writing the explanation..."]; let i = 0;
+  $("busytxt").textContent = msgs[0]; $("busy").classList.add("show");
+  const t = setInterval(() => { i = Math.min(i + 1, 2); $("busytxt").textContent = msgs[i]; }, 6000);
+  $("go").disabled = true;
+  try {
+    const r = await fetch("/api/analyze", {method: "POST", body: fd});
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { showErr(j.error || "Something went wrong. Please try again."); return; }
+    cur = {id: String(Date.now()), date: $("rdate").value || new Date().toISOString().slice(0, 10), lang: $("lang").value, result: j};
+    if (!S.settings.priv) { S.reports.unshift(slim(cur)); S.reports = S.reports.slice(0, 60); persist(); }
+    tab = "sum"; chatHist = []; chatFor = null; showResult();
+  } catch (e) { showErr("Network problem. Check your connection and try again."); }
+  finally { clearInterval(t); $("busy").classList.remove("show"); $("go").disabled = false; }
+}
+function slim(r) { const x = JSON.parse(JSON.stringify(r)); delete x.result.text_read; return x; }
+
+/* ---------- result ---------- */
+const LEVEL = {routine: ["🟢", "Routine: no value is outside its range"], see_doctor_soon: ["🟡", "See a doctor soon"], urgent: ["🔴", "Urgent: please see a doctor promptly"]};
+const ICON = {normal: "✅", high: "⬆️", low: "⬇️", unclear: "❔"};
+function showResult() { go("result"); renderResult(); }
+function renderResult() {
+  const R = cur.result, lv = LEVEL[R.level] || LEVEL.routine;
+  $("rhead").innerHTML = `<div class="mute">${esc(cur.date)} · ${R.findings.length} tests</div><div class="banner ${esc(R.level)}">${lv[0]} ${lv[1]}</div>`;
+  document.querySelectorAll("#rtabs button").forEach((b) => b.classList.toggle("on", b.dataset.t === tab));
+  $("rbody").innerHTML = tab === "sum" ? tabSummary(R) : tab === "det" ? tabDetail(R) : tabGraph(R);
+}
+document.querySelectorAll("#rtabs button").forEach((b) => b.addEventListener("click", () => { tab = b.dataset.t; renderResult(); }));
+
+function tabSummary(R) {
+  const abn = R.findings.filter((f) => f.status === "high" || f.status === "low"), ok = R.findings.filter((f) => f.status === "normal").length;
+  return `<div class="card"><div class="kv"><h3>💡 AI Summary</h3><button class="btn sec small" id="lis" onclick="listen()">🔊 Listen</button></div><p id="sumtxt">${esc(R.summary)}</p>
+  <p class="mute">The AI explains. Whether each value is high, low or normal was decided by a rule engine.</p></div>
+  <div class="card"><h3>Key results</h3>${abn.length ? abn.map((f) => `<div class="res"><div class="kv"><span class="n">${esc(f.name)}</span><span class="pill ${f.status}">${f.status.toUpperCase()}</span></div><small>${esc(f.value)} ${esc(f.unit)} · normal ${esc(f.range_used || "n/a")}</small></div>`).join("") : '<p class="mute">No value is outside its range.</p>'}
+  ${ok ? `<p class="mute" style="margin-top:8px">${ok} other value${ok > 1 ? "s are" : " is"} normal.</p>` : ""}</div>
+  ${R.questions.length ? `<div class="card"><h3>Ask your doctor</h3><ul style="padding-left:18px;margin:8px 0">${R.questions.map((q) => `<li>${esc(q)}</li>`).join("")}</ul></div>` : ""}
+  <button class="btn" onclick="downloadPdf()">📄 Download PDF for my doctor</button>
+  <div class="row" style="margin-top:10px"><button class="btn sec small" onclick="openChat()">💬 Chat</button><button class="btn sec small" onclick="openCompare()">📈 Compare</button></div>
+  <p class="disc">Educational tool only. Not a diagnosis or a substitute for a doctor.</p>`;
+}
+function tabDetail(R) {
+  return R.findings.map((f) => `<div class="card"><div class="kv"><span class="n">${ICON[f.status] || "❔"} ${esc(f.name)}</span><span class="pill ${f.status}">${f.status.toUpperCase()}</span></div>
+  <p style="margin:4px 0"><b>${esc(f.value)} ${esc(f.unit)}</b></p><div class="mute">Range used: ${esc(f.range_used || "n/a")} (${esc(f.range_source || "none")})</div>
+  ${f.conflict ? `<div class="warnbox">${esc(f.conflict)}</div>` : ""}${f.check ? `<div class="warnbox">${esc(f.check)}</div>` : ""}
+  ${f.kb ? `<details><summary>What is this test?</summary><p>${esc(f.kb.measures)}</p>${f.kb.meaning ? `<p>${esc(f.kb.meaning)}</p>` : ""}<p class="mute">Source: <a href="${esc(f.kb.url)}" target="_blank" rel="noopener">${esc(f.kb.source)}</a></p></details>`
+   : f.ai_meaning ? `<p class="mute" style="margin-top:6px">AI-written explanation (no curated source): ${esc(f.ai_meaning)}</p>` : ""}</div>`).join("")
+  + (R.text_read ? `<details class="card"><summary>Text read from your file (check if correct)</summary><pre style="white-space:pre-wrap;font-size:12px">${esc(R.text_read)}</pre></details>` : "");
+}
+function scale(f) {
+  const v = parseFloat(String(f.value).replace(/,/g, "")), r = f.range_nums;
+  if (!r || isNaN(v)) return null;
+  let [lo, hi] = r, min, max;
+  if (lo != null && hi != null) { const sp = hi - lo; min = Math.min(lo - sp * 0.5, v - sp * 0.1); max = Math.max(hi + sp * 0.5, v + sp * 0.1); if (lo >= 0 && min < 0) min = 0; }
+  else if (hi != null) { min = 0; max = Math.max(hi * 1.5, v * 1.1); lo = 0; }
+  else { min = 0; max = Math.max(lo * 2, v * 1.1); hi = max; }
+  const p = (x) => Math.max(0, Math.min(100, (x - min) / (max - min) * 100));
+  return {a: p(lo), b: p(hi), m: p(v)};
+}
+function tabGraph(R) {
+  const rows = R.findings.map((f) => { const s = scale(f); if (!s) return ""; const c = f.status === "normal" ? "var(--ok)" : "var(--bad)";
+    return `<div class="res"><div class="kv"><span class="n">${esc(f.name)}</span><span class="pill ${f.status}">${esc(f.value)} ${esc(f.unit)}</span></div>
+    <div class="track"><div class="band" style="left:${s.a}%;width:${Math.max(s.b - s.a, 1)}%"></div><div class="mark" style="left:${s.m}%;background:${c}"></div></div>
+    <small>Green band = range used (${esc(f.range_used)})</small></div>`; }).join("");
+  return `<div class="card"><h3>Where each value sits</h3><p class="mute">The marker is your value. Green is the range used.</p>${rows || '<p class="mute">No numeric ranges to draw.</p>'}</div>
+  ${S.reports.length > 1 ? '<button class="btn sec" onclick="openCompare()">📈 See trends over time</button>' : '<p class="mute">Save two or more reports to see trends over time.</p>'}`;
+}
+function listen() {
+  if (!("speechSynthesis" in window)) { alert("Voice is not supported on this device."); return; }
+  if (speechSynthesis.speaking) { speechSynthesis.cancel(); $("lis").textContent = "🔊 Listen"; return; }
+  const u = new SpeechSynthesisUtterance($("sumtxt").textContent);
+  u.lang = {English: "en-US", Bangla: "bn-BD", Hindi: "hi-IN"}[cur.lang] || "en-US";
+  u.onend = () => { const b = $("lis"); if (b) b.textContent = "🔊 Listen"; };
+  speechSynthesis.speak(u); $("lis").textContent = "⏹ Stop";
+}
+async function downloadPdf() {
+  try {
+    const r = await fetch("/api/pdf", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({result: cur.result, date: cur.date, age: S.settings.age ? +S.settings.age : null, sex: S.settings.sex || null})});
+    if (!r.ok) throw 0;
+    const blob = await r.blob(), file = new File([blob], "reportsimple_summary.pdf", {type: "application/pdf"});
+    if (navigator.canShare && navigator.canShare({files: [file]})) { try { await navigator.share({files: [file], title: "Lab report summary"}); return; } catch (e) {} }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "reportsimple_summary.pdf"; document.body.appendChild(a); a.click(); a.remove();
+  } catch (e) { alert("Could not create the PDF. Please try again."); }
+}
+
+/* ---------- reports library ---------- */
+function abnCount(r) { return r.result.findings.filter((f) => f.status === "high" || f.status === "low").length; }
+function renderReports() {
+  const q = $("search").value.toLowerCase(), list = S.reports.filter((r) => !q || r.date.includes(q) || r.result.findings.some((f) => f.name.toLowerCase().includes(q)));
+  $("rlist").innerHTML = list.length ? list.map((r) => `<div class="card" onclick="openReport('${esc(r.id)}')" style="cursor:pointer"><div class="kv"><b>Lab report · ${esc(r.date)}</b><span class="pill ${({routine:"normal",see_doctor_soon:"warn",urgent:"high"})[r.result.level] || "normal"}">${({routine:"Routine",see_doctor_soon:"Check soon",urgent:"Urgent"})[r.result.level] || "Routine"}</span></div>
+    <div class="mute">${r.result.findings.length} tests · ${abnCount(r)} outside range</div><button class="btn sec small" style="margin-top:8px" onclick="event.stopPropagation();delReport('${esc(r.id)}')">Delete</button></div>`).join("")
+    : `<div class="card mute">${S.settings.priv ? "Privacy mode is on, so reports are not saved." : "No saved reports yet. Upload one to get started."}</div>`;
+}
+function openReport(id) { const r = S.reports.find((x) => x.id === id); if (!r) return; cur = JSON.parse(JSON.stringify(r)); tab = "sum"; chatHist = []; chatFor = null; showResult(); }
+function delReport(id) { if (confirm("Delete this report from this device?")) { S.reports = S.reports.filter((r) => r.id !== id); persist(); renderReports(); } }
+function backup() { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(S.reports)], {type: "application/json"})); a.download = "reportsimple_reports.json"; a.click(); }
+$("restore").addEventListener("change", async (e) => {
+  try { const d = JSON.parse(await e.target.files[0].text());
+    if (!Array.isArray(d) || !d.every((r) => r.id && r.date && r.result && Array.isArray(r.result.findings))) throw 0;
+    const have = new Set(S.reports.map((r) => r.id)); S.reports = S.reports.concat(d.filter((r) => !have.has(r.id))).slice(0, 60); persist(); renderReports(); alert("Restored.");
+  } catch (x) { alert("This file is not a valid backup."); } e.target.value = "";
+});
+
+/* ---------- compare + trends ---------- */
+function keyOf(f) { return f.key || f.name; }
+function numv(f) { const v = parseFloat(String(f.value).replace(/,/g, "")); return isNaN(v) ? null : v; }
+function openCompare() { go("compare"); renderCompare(); }
+function renderCompare(a, b) {
+  const rs = S.reports.slice().sort((x, y) => x.date.localeCompare(y.date)), el = $("cbody");
+  if (rs.length < 2) { el.innerHTML = '<div class="card mute">Save at least two reports to compare them. Privacy mode must be off.</div>'; return; }
+  a = a || rs[rs.length - 2].id; b = b || rs[rs.length - 1].id;
+  const opt = (sel) => rs.map((r) => `<option value="${esc(r.id)}" ${r.id === sel ? "selected" : ""}>${esc(r.date)}</option>`).join("");
+  const A = rs.find((r) => r.id === a), B = rs.find((r) => r.id === b), mapA = {};
+  A.result.findings.forEach((f) => (mapA[keyOf(f)] = f));
+  const rows = B.result.findings.filter((f) => mapA[keyOf(f)] && numv(f) != null && numv(mapA[keyOf(f)]) != null).map((f) => {
+    const p = mapA[keyOf(f)], pv = numv(p), lv = numv(f), ch = (lv - pv) / (Math.abs(pv) || 1), dir = Math.abs(ch) < 0.02 ? "→" : lv > pv ? "↑" : "↓";
+    let cls = "flat"; const r = f.range_nums;
+    if (r) { const dist = (x) => (r[0] != null && x < r[0] ? r[0] - x : r[1] != null && x > r[1] ? x - r[1] : 0), dp = dist(pv), dl = dist(lv);
+      cls = dl === 0 && dp === 0 ? "good" : dl < dp ? "good" : dl > dp ? "up" : "flat"; }
+    return `<tr><td>${esc(f.name)}</td><td>${esc(p.value)}</td><td>${esc(f.value)} <span class="pill ${f.status}">${f.status.toUpperCase()}</span></td><td class="${cls}" style="font-size:20px;font-weight:700">${dir}</td></tr>`; });
+  el.innerHTML = `<div class="row"><div><label class="f">Previous</label><select id="ca">${opt(a)}</select></div><div><label class="f">Latest</label><select id="cb">${opt(b)}</select></div></div>
+  <div class="card"><table><tr><th>Parameter</th><th>Prev</th><th>Latest</th><th></th></tr>${rows.join("") || '<tr><td colspan="4" class="mute">No tests in common.</td></tr>'}</table>
+  <p class="mute">Arrow shows how the value moved. Green means closer to (or still inside) the range, red means further away.</p></div>
+  <h2>Trend graph</h2><select id="tsel"></select><div id="tchart"></div>`;
+  $("ca").onchange = $("cb").onchange = () => renderCompare($("ca").value, $("cb").value);
+  const names = {}; rs.forEach((r) => r.result.findings.forEach((f) => { if (numv(f) != null) (names[keyOf(f)] = names[keyOf(f)] || {name: f.name, n: 0}).n++; }));
+  const multi = Object.keys(names).filter((k) => names[k].n > 1);
+  $("tsel").innerHTML = multi.map((k) => `<option value="${esc(k)}">${esc(names[k].name)}</option>`).join("");
+  const draw = () => { $("tchart").innerHTML = multi.length ? trend(rs, $("tsel").value) : '<p class="mute">No test appears in two or more reports yet.</p>'; };
+  $("tsel").onchange = draw; draw();
+}
+function trend(rs, key) {
+  const pts = []; let rng = null, unit = "";
+  rs.forEach((r) => r.result.findings.forEach((f) => { if (keyOf(f) === key && numv(f) != null) { pts.push({d: r.date, v: numv(f)}); rng = f.range_nums || rng; unit = f.unit || unit; } }));
+  if (pts.length < 2) return '<p class="mute">Need two reports with this test.</p>';
+  const W = 360, H = 190, L = 40, Rr = 12, T = 14, B = 34, vals = pts.map((p) => p.v).concat(rng ? rng.filter((x) => x != null) : []);
+  let mn = Math.min(...vals), mx = Math.max(...vals), pad = (mx - mn || 1) * 0.15; mn -= pad; mx += pad;
+  const x = (i) => L + (W - L - Rr) * (pts.length === 1 ? 0.5 : i / (pts.length - 1)), y = (v) => T + (H - T - B) * (1 - (v - mn) / (mx - mn));
+  let band = "";
+  if (rng) { const lo = rng[0] != null ? rng[0] : mn, hi = rng[1] != null ? rng[1] : mx; band = `<rect x="${L}" y="${y(Math.min(hi, mx))}" width="${W - L - Rr}" height="${Math.max(2, y(Math.max(lo, mn)) - y(Math.min(hi, mx)))}" fill="#9BDDB4" opacity=".45"/>`; }
+  const path = pts.map((p, i) => `${i ? "L" : "M"}${x(i)},${y(p.v)}`).join(" ");
+  return `<div class="card"><svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Trend chart">${band}
+  <line x1="${L}" y1="${T}" x2="${L}" y2="${H - B}" stroke="#9aa9bd"/><line x1="${L}" y1="${H - B}" x2="${W - Rr}" y2="${H - B}" stroke="#9aa9bd"/>
+  <text x="4" y="${T + 8}" font-size="10" fill="#6B7C93">${mx.toFixed(1)}</text><text x="4" y="${H - B}" font-size="10" fill="#6B7C93">${mn.toFixed(1)}</text>
+  <path d="${path}" fill="none" stroke="#1D6FE8" stroke-width="2.5"/>${pts.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.v)}" r="4.5" fill="#1D6FE8"/><text x="${x(i)}" y="${y(p.v) - 9}" font-size="10" text-anchor="middle" fill="currentColor">${p.v}</text><text x="${x(i)}" y="${H - 14}" font-size="9.5" text-anchor="middle" fill="#6B7C93">${esc(p.d.slice(5))}</text>`).join("")}</svg>
+  <p class="mute">${esc(unit)} · green band is the range used in the latest report</p></div>`;
+}
+
+/* ---------- chat ---------- */
+const CHIPS = ["Which results are outside the range?", "What should I ask my doctor?", "Explain my results in simple words", "Which result matters most?"];
+function openChat() {
+  go("chat");
+  if (!cur && S.reports.length) cur = JSON.parse(JSON.stringify(S.reports[0]));
+  if (cur && chatFor !== cur.id) { chatFor = cur.id; chatHist = []; }
+  $("chatctx").textContent = cur ? `Report from ${cur.date}. I can only answer about this report. I do not diagnose or recommend treatment.` : "Upload or open a report first, then ask questions about it.";
+  $("chips").innerHTML = cur ? CHIPS.map((c) => `<button class="chip" onclick="ask(this.textContent)">${esc(c)}</button>`).join("") : "";
+  drawChat();
+}
+function drawChat() { $("msgs").innerHTML = chatHist.map((m) => `<div class="msg ${m.role === "user" ? "u" : "a"}">${esc(m.content)}</div>`).join(""); document.querySelector("main").scrollTop = 1e6; }
+$("cin").addEventListener("keydown", (e) => { if (e.key === "Enter") sendChat(); });
+function ask(t) { $("cin").value = t; sendChat(); }
+async function sendChat() {
+  const t = $("cin").value.trim(); if (!t || !cur) return;
+  $("cin").value = ""; const hist = chatHist.slice(-6); chatHist.push({role: "user", content: t}); chatHist.push({role: "assistant", content: "..."}); drawChat(); $("csend").disabled = true;
+  try {
+    const r = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({message: t, findings: cur.result.findings, lang: cur.lang, history: hist})});
+    const j = await r.json().catch(() => ({})); chatHist[chatHist.length - 1].content = r.ok ? j.reply : (j.error || "Something went wrong.");
+  } catch (e) { chatHist[chatHist.length - 1].content = "Network problem. Please try again."; }
+  $("csend").disabled = false; drawChat();
+}
+
+go("home");
+</script>
+</body>
+</html>

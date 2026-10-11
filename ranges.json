@@ -1,0 +1,494 @@
+{
+ "_meta": {
+  "note": "Typical adult reference intervals compiled from commonly published sources. Laboratories differ by method and population. Treat these as general guidance, not clinical limits, and have them reviewed by a qualified professional.",
+  "age_policy": "Personalized (sex-specific) ranges are used only for age 18 and over. Under 18, pregnancy and special populations are not covered, so the printed range from the report is used.",
+  "version": "2026-10-draft"
+ },
+ "tests": [
+  {
+   "key": "hemoglobin",
+   "name": "Hemoglobin",
+   "unit": "g/dL",
+   "units": [
+    "g/dl"
+   ],
+   "aliases": [
+    "hemoglobin",
+    "haemoglobin",
+    "hb",
+    "hgb"
+   ],
+   "ranges": {
+    "male": [
+     13.0,
+     17.0
+    ],
+    "female": [
+     12.0,
+     15.5
+    ]
+   }
+  },
+  {
+   "key": "wbc",
+   "name": "White blood cell (WBC) count",
+   "unit": "/cumm",
+   "units": [
+    "/cumm",
+    "/mm3",
+    "/ul",
+    "/mcl",
+    "cells/cumm",
+    "cells/mm3",
+    "cells/ul"
+   ],
+   "aliases": [
+    "wbc",
+    "wbc count",
+    "white blood cell",
+    "white blood cells",
+    "total leucocyte count",
+    "total leukocyte count",
+    "tlc"
+   ],
+   "ranges": {
+    "any": [
+     4000,
+     11000
+    ]
+   }
+  },
+  {
+   "key": "platelets",
+   "name": "Platelet count",
+   "unit": "/cumm",
+   "units": [
+    "/cumm",
+    "/mm3",
+    "/ul",
+    "/mcl",
+    "cells/cumm",
+    "cells/mm3",
+    "cells/ul"
+   ],
+   "aliases": [
+    "platelet",
+    "platelets",
+    "platelet count",
+    "plt"
+   ],
+   "ranges": {
+    "any": [
+     150000,
+     450000
+    ]
+   }
+  },
+  {
+   "key": "rbc",
+   "name": "Red blood cell (RBC) count",
+   "unit": "million/cumm",
+   "units": [
+    "million/cumm",
+    "million/mm3",
+    "million/ul",
+    "10^6/ul",
+    "x10^6/ul",
+    "m/ul",
+    "mil/ul"
+   ],
+   "aliases": [
+    "rbc",
+    "rbc count",
+    "red blood cell",
+    "red blood cells",
+    "red cell count"
+   ],
+   "ranges": {
+    "male": [
+     4.5,
+     5.9
+    ],
+    "female": [
+     4.1,
+     5.1
+    ]
+   }
+  },
+  {
+   "key": "glucose_fasting",
+   "name": "Fasting blood sugar",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "fasting blood sugar",
+    "fasting glucose",
+    "fasting plasma glucose",
+    "fbs",
+    "fbg",
+    "fpg"
+   ],
+   "ranges": {
+    "any": [
+     70,
+     99
+    ]
+   }
+  },
+  {
+   "key": "hba1c",
+   "name": "HbA1c",
+   "unit": "%",
+   "units": [
+    "%"
+   ],
+   "aliases": [
+    "hba1c",
+    "a1c",
+    "hemoglobin a1c",
+    "glycated hemoglobin",
+    "glycosylated hemoglobin"
+   ],
+   "ranges": {
+    "any": [
+     4.0,
+     5.6
+    ]
+   }
+  },
+  {
+   "key": "cholesterol_total",
+   "name": "Total cholesterol",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "total cholesterol",
+    "cholesterol total",
+    "serum cholesterol",
+    "cholesterol"
+   ],
+   "ranges": {
+    "any": [
+     null,
+     200
+    ]
+   }
+  },
+  {
+   "key": "ldl",
+   "name": "LDL cholesterol",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "ldl",
+    "ldl c",
+    "ldl cholesterol"
+   ],
+   "ranges": {
+    "any": [
+     null,
+     100
+    ]
+   }
+  },
+  {
+   "key": "hdl",
+   "name": "HDL cholesterol",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "hdl",
+    "hdl c",
+    "hdl cholesterol"
+   ],
+   "ranges": {
+    "male": [
+     40,
+     null
+    ],
+    "female": [
+     50,
+     null
+    ]
+   }
+  },
+  {
+   "key": "triglycerides",
+   "name": "Triglycerides",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "triglyceride",
+    "triglycerides",
+    "tg"
+   ],
+   "ranges": {
+    "any": [
+     null,
+     150
+    ]
+   }
+  },
+  {
+   "key": "creatinine",
+   "name": "Serum creatinine",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "creatinine",
+    "serum creatinine"
+   ],
+   "ranges": {
+    "male": [
+     0.7,
+     1.3
+    ],
+    "female": [
+     0.6,
+     1.1
+    ]
+   }
+  },
+  {
+   "key": "uric_acid",
+   "name": "Uric acid",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "uric acid",
+    "serum uric acid"
+   ],
+   "ranges": {
+    "male": [
+     3.5,
+     7.2
+    ],
+    "female": [
+     2.6,
+     6.0
+    ]
+   }
+  },
+  {
+   "key": "alt",
+   "name": "ALT (SGPT)",
+   "unit": "U/L",
+   "units": [
+    "u/l",
+    "iu/l"
+   ],
+   "aliases": [
+    "alt",
+    "sgpt",
+    "alanine aminotransferase",
+    "alanine transaminase"
+   ],
+   "ranges": {
+    "male": [
+     7,
+     55
+    ],
+    "female": [
+     7,
+     45
+    ]
+   }
+  },
+  {
+   "key": "ast",
+   "name": "AST (SGOT)",
+   "unit": "U/L",
+   "units": [
+    "u/l",
+    "iu/l"
+   ],
+   "aliases": [
+    "ast",
+    "sgot",
+    "aspartate aminotransferase",
+    "aspartate transaminase"
+   ],
+   "ranges": {
+    "male": [
+     8,
+     48
+    ],
+    "female": [
+     8,
+     43
+    ]
+   }
+  },
+  {
+   "key": "alp",
+   "name": "Alkaline phosphatase",
+   "unit": "U/L",
+   "units": [
+    "u/l",
+    "iu/l"
+   ],
+   "aliases": [
+    "alp",
+    "alkaline phosphatase"
+   ],
+   "ranges": {
+    "any": [
+     44,
+     147
+    ]
+   }
+  },
+  {
+   "key": "bilirubin_total",
+   "name": "Total bilirubin",
+   "unit": "mg/dL",
+   "units": [
+    "mg/dl"
+   ],
+   "aliases": [
+    "total bilirubin",
+    "bilirubin total",
+    "serum bilirubin total"
+   ],
+   "ranges": {
+    "any": [
+     0.1,
+     1.2
+    ]
+   }
+  },
+  {
+   "key": "albumin",
+   "name": "Serum albumin",
+   "unit": "g/dL",
+   "units": [
+    "g/dl"
+   ],
+   "aliases": [
+    "albumin",
+    "serum albumin"
+   ],
+   "ranges": {
+    "any": [
+     3.5,
+     5.0
+    ]
+   }
+  },
+  {
+   "key": "tsh",
+   "name": "TSH",
+   "unit": "mIU/L",
+   "units": [
+    "miu/l",
+    "uiu/ml",
+    "uiu/l"
+   ],
+   "aliases": [
+    "tsh",
+    "thyroid stimulating hormone"
+   ],
+   "ranges": {
+    "any": [
+     0.4,
+     4.0
+    ]
+   }
+  },
+  {
+   "key": "potassium",
+   "name": "Potassium",
+   "unit": "mmol/L",
+   "units": [
+    "mmol/l",
+    "meq/l"
+   ],
+   "aliases": [
+    "potassium",
+    "serum potassium"
+   ],
+   "ranges": {
+    "any": [
+     3.5,
+     5.1
+    ]
+   }
+  },
+  {
+   "key": "sodium",
+   "name": "Sodium",
+   "unit": "mmol/L",
+   "units": [
+    "mmol/l",
+    "meq/l"
+   ],
+   "aliases": [
+    "sodium",
+    "serum sodium"
+   ],
+   "ranges": {
+    "any": [
+     135,
+     145
+    ]
+   }
+  },
+  {
+   "key": "vitamin_d",
+   "name": "Vitamin D (25-OH)",
+   "unit": "ng/mL",
+   "units": [
+    "ng/ml"
+   ],
+   "aliases": [
+    "vitamin d",
+    "25 oh vitamin d",
+    "25 hydroxy vitamin d",
+    "25 oh d"
+   ],
+   "ranges": {
+    "any": [
+     30,
+     100
+    ]
+   }
+  },
+  {
+   "key": "ferritin",
+   "name": "Ferritin",
+   "unit": "ng/mL",
+   "units": [
+    "ng/ml",
+    "ug/l"
+   ],
+   "aliases": [
+    "ferritin",
+    "serum ferritin"
+   ],
+   "ranges": {
+    "male": [
+     24,
+     336
+    ],
+    "female": [
+     11,
+     307
+    ]
+   }
+  }
+ ]
+}
